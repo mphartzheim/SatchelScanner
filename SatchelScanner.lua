@@ -1,7 +1,7 @@
 -- Coded by: Exzu / EU-Aszune
 -- Modified by: Seintefie / US-Thrall
 
-textDatabase = {
+local textDatabase = {
 	ANT = { outLine = "OUTLINE", fontSize = "14", loc = "TOP", x = 0, y = 8, color = {1, 1, 1, 1}, text = "", },
 	statusText = { outLine = "OUTLINE", fontSize = "16", loc = "LEFT", x = 5, y = 61, color = {0, 1, 0, 1}, text = "Current Status:", },
 	scanText = { outLine = "OUTLINE", fontSize = "16", loc = "LEFT", x = 95, y = 61, color = {1, 0, 0, 1}, text = "Not Running", },
@@ -17,7 +17,7 @@ textDatabase = {
 	bagCounter = { outLine = "OUTLINE", fontSize = "14", loc = "TOP", x = 116, y = -23, color = {0, 0.6, 0.8, 1}, bag = true, text = "0", },
 }
 
-frameDatabase = {
+local frameDatabase = {
 	scanButton = { zscale = 0, zxscale = 0, yscale = 22/32, xscale = 80/128, texture = true, Type = "Button", width = "80", height = "25", loc = "BOTTOM", x = -80, y = 5, text = "Start", script = true, functionName = "startScanning()", normalTxt = "Interface\\Buttons\\UI-Panel-Button-Up.blp", pushedTxt = "Interface\\Buttons\\UI-Panel-Button-Down.blp", highLightTxt = "Interface\\Buttons\\UI-Panel-Button-Highlight.png", setAlpha=true, },
 	stopButton = { zscale = 0, zxscale = 0, yscale = 22/32, xscale = 80/128, texture = true, Type = "Button", width = "80", height = "25", loc = "BOTTOM", x = 80, y = 5, text = "Stop", script = true, functionName = "stopScanning()", normalTxt = "Interface\\Buttons\\UI-Panel-Button-Up.blp", pushedTxt = "Interface\\Buttons\\UI-Panel-Button-Down.blp", highLightTxt = "Interface\\Buttons\\UI-Panel-Button-Highlight.png", setAlpha=true, },
 	configButton = { zscale = 0, zxscale = 0, yscale = 1, xscale = 1, texture = true, Type = "Button", width = "16", height = "16", loc = "TOP", x = 97, y = -5, script = true, functionName = "InterfaceOptionsFrame_OpenToCategory(SatchelScanner.childpanel)", normalTxt = "Interface\\Addons\\SatchelScanner\\icons\\config.tga", pushedTxt = "Interface\\Addons\\SatchelScanner\\icons\\configpush.tga", highLightTxt = "Interface\\Buttons\\UI-Panel-MinimizeButton-Highlight.blp", setAlpha=true, },
@@ -50,26 +50,27 @@ local bgAlpha = 0
 
 -- New Variables
 local classQueues = {false, false, false}
-local dungeonID = 0
 
 -- Dungeon Scan Var
 local scanVar = {"# ...", "# Searching..."}
-local dungeonVar = {[789]  = {Type = "WoD",	Dungeon = " Heroic ",	Tank = false,	Heal = false,	DPS = false},
-					[744]  = {Type = "TW",	Dungeon = " BC ",		Tank = false,	Heal = false,	DPS = false},
-					[995]  = {Type = "TW",	Dungeon = " LK ",		Tank = false,	Heal = false,	DPS = false},
-					[1146] = {Type = "TW",	Dungeon = " Cata ",		Tank = false,	Heal = false,	DPS = false},
-					[849]  = {Type = "LFR",	Dungeon = " WC ",		Tank = false,	Heal = false,	DPS = false},
-					[850]  = {Type = "LFR",	Dungeon = " AS ",		Tank = false,	Heal = false,	DPS = false},
-					[851]  = {Type = "LFR",	Dungeon = " IR ",		Tank = false,	Heal = false,	DPS = false},
-					[847]  = {Type = "LFR",	Dungeon = " SW ",		Tank = false,	Heal = false,	DPS = false},
-					[846]  = {Type = "LFR",	Dungeon = " TBF ",		Tank = false,	Heal = false,	DPS = false},
-					[848]  = {Type = "LFR",	Dungeon = " IA ",		Tank = false,	Heal = false,	DPS = false},
-					[823]  = {Type = "LFR",	Dungeon = " BC ",		Tank = false,	Heal = false,	DPS = false},
-					[982]  = {Type = "LFR",	Dungeon = " HB ",		Tank = false,	Heal = false,	DPS = false},
-					[983]  = {Type = "LFR",	Dungeon = " HoB ",		Tank = false,	Heal = false,	DPS = false},
-					[984]  = {Type = "LFR",	Dungeon = " BoS ",		Tank = false,	Heal = false,	DPS = false},
-					[985]  = {Type = "LFR",	Dungeon = " DR ",		Tank = false,	Heal = false,	DPS = false},
-					[986]  = {Type = "LFR",	Dungeon = " TBG ",		Tank = false,	Heal = false,	DPS = false}}
+local dungeonVar = {
+	[789]  = {Type = "WoD",	Dungeon = " Heroic ",	Tank = false,	Heal = false,	DPS = false},
+	[744]  = {Type = "TW",	Dungeon = " BC ",		Tank = false,	Heal = false,	DPS = false},
+	[995]  = {Type = "TW",	Dungeon = " LK ",		Tank = false,	Heal = false,	DPS = false},
+	[1146] = {Type = "TW",	Dungeon = " Cata ",		Tank = false,	Heal = false,	DPS = false},
+	[849]  = {Type = "LFR",	Dungeon = " WC ",		Tank = false,	Heal = false,	DPS = false},
+	[850]  = {Type = "LFR",	Dungeon = " AS ",		Tank = false,	Heal = false,	DPS = false},
+	[851]  = {Type = "LFR",	Dungeon = " IR ",		Tank = false,	Heal = false,	DPS = false},
+	[847]  = {Type = "LFR",	Dungeon = " SW ",		Tank = false,	Heal = false,	DPS = false},
+	[846]  = {Type = "LFR",	Dungeon = " TBF ",		Tank = false,	Heal = false,	DPS = false},
+	[848]  = {Type = "LFR",	Dungeon = " IA ",		Tank = false,	Heal = false,	DPS = false},
+	[823]  = {Type = "LFR",	Dungeon = " BC ",		Tank = false,	Heal = false,	DPS = false},
+	[982]  = {Type = "LFR",	Dungeon = " HB ",		Tank = false,	Heal = false,	DPS = false},
+	[983]  = {Type = "LFR",	Dungeon = " HoB ",		Tank = false,	Heal = false,	DPS = false},
+	[984]  = {Type = "LFR",	Dungeon = " BoS ",		Tank = false,	Heal = false,	DPS = false},
+	[985]  = {Type = "LFR",	Dungeon = " DR ",		Tank = false,	Heal = false,	DPS = false},
+	[986]  = {Type = "LFR",	Dungeon = " TBG ",		Tank = false,	Heal = false,	DPS = false},
+}
 local classScan = {"Not Scanning...","Scanning...","Satchel Found!"}
 local ctaVar = {"Call to Arms: Tank","Call to Arms: Healer","Call to Arms: Dps"}
 
@@ -104,12 +105,18 @@ function startScanning()
 		textDatabase.scanText.textFrame:SetTextColor(unpack(greenColor))
 		textDatabase.scanText.textFrame:SetText(runVar[2])
 		if scanForTank then
+			textDatabase.tankScanningText.textFrame:SetText(classScan[2])
+			textDatabase.tankScanningText.textFrame:SetTextColor(unpack(yellowColor))
 			textDatabase.tankdg1.textFrame:SetText(scanVar[2])
 		end
 		if scanForHeal then
+			textDatabase.healScanningText.textFrame:SetText(classScan[2])
+			textDatabase.healScanningText.textFrame:SetTextColor(unpack(yellowColor))
 			textDatabase.healdg1.textFrame:SetText(scanVar[2])
 		end
 		if scanForDps then
+			textDatabase.dpsScanningText.textFrame:SetText(classScan[2])
+			textDatabase.dpsScanningText.textFrame:SetTextColor(unpack(yellowColor))
 			textDatabase.dpsdg1.textFrame:SetText(scanVar[2])
 		end
 		RequestLFDPlayerLockInfo()
@@ -248,19 +255,25 @@ end
 function classScanner(id)
 	classQueues = satchelFinder(id)
 	if scanForTank and classQueues[1] then
-		dungeonVar[id].Tank = true;
+		dungeonVar[id].Tank = true
 	else
-		dungeonVar[id].Tank = false;
+		dungeonVar[id].Tank = false
+		textDatabase.tankScanningText.textFrame:SetText(classScan[2])
+		textDatabase.tankScanningText.textFrame:SetTextColor(unpack(yellowColor))
 	end
 	if scanForHeal and classQueues[2] then
-		dungeonVar[id].Heal = true;
+		dungeonVar[id].Heal = true
 	else
-		dungeonVar[id].Heal = false;
+		dungeonVar[id].Heal = false
+		textDatabase.healScanningText.textFrame:SetText(classScan[2])
+		textDatabase.healScanningText.textFrame:SetTextColor(unpack(yellowColor))
 	end
 	if scanForDps and classQueues[3] then
-		dungeonVar[id].DPS = true;
+		dungeonVar[id].DPS = true
 	else
-		dungeonVar[id].DPS = false;
+		dungeonVar[id].DPS = false
+		textDatabase.dpsScanningText.textFrame:SetText(classScan[2])
+		textDatabase.dpsScanningText.textFrame:SetTextColor(unpack(yellowColor))
 	end
 end
 
@@ -269,108 +282,59 @@ function buildQueueText()
 	local healQueueText = ""
 	local dpsQueueText = ""
 	
-	for id in pairs(dungeonVar) do
+	for id in pairs(dungeonVar) do -- Need to make this iterate in order, really pissing me off that it's random.
 		if dungeonVar[id].Tank then
-			tankQueueText = tankQueueText .. dungeonVar[id].Dungeon
+			tankQueueText = tankQueueText .. dungeonVar[id].Type .. dungeonVar[id].Dungeon .. "| "
+			-- Temporarily concatenating the Type and Dungeon. Ideally, if this could iterate in order then this
+			-- would list the Type once with the Dungeons in that type behind it.
+			-- Ex. "WoD - Heroic // LFR - HB BoS TBG"
+			textDatabase.tankScanningText.textFrame:SetText(classScan[3])
+			textDatabase.tankScanningText.textFrame:SetTextColor(unpack(greenColor))
 		end
 		if dungeonVar[id].Heal then
-			healQueueText = healQueueText .. dungeonVar[id].Dungeon
+			healQueueText = healQueueText .. dungeonVar[id].Type .. dungeonVar[id].Dungeon .. "| "
+			textDatabase.healScanningText.textFrame:SetText(classScan[3])
+			textDatabase.healScanningText.textFrame:SetTextColor(unpack(greenColor))
 		end
 		if dungeonVar[id].DPS then
-			dpsQueueText = dpsQueueText .. dungeonVar[id].Dungeon
+			dpsQueueText = dpsQueueText .. dungeonVar[id].Type .. dungeonVar[id].Dungeon .. "| "
+			textDatabase.dpsScanningText.textFrame:SetText(classScan[3])
+			textDatabase.dpsScanningText.textFrame:SetTextColor(unpack(greenColor))
+		end
+	end
+	
+	-- Raid Warning, Sounds, and resetting Queue Variable if nothing found
+	if tankQueueText == "" then
+		tankQueueText = scanVar[2]
+	else
+		if raidWarnNotify then
+			RaidNotice_AddMessage(RaidWarningFrame, ctaVar[1], ChatTypeInfo["RAID_WARNING"])
+		end
+	end
+	if healQueueText == "" then
+		healQueueText = scanVar[2]
+	else
+		if raidWarnNotify then
+			RaidNotice_AddMessage(RaidWarningFrame, ctaVar[2], ChatTypeInfo["RAID_WARNING"])
+		end
+	end
+	if dpsQueueText == "" then
+		dpsQueueText = scanVar[2]
+	else
+		if raidWarnNotify then
+			RaidNotice_AddMessage(RaidWarningFrame, ctaVar[3], ChatTypeInfo["RAID_WARNING"])
+		end
+	end
+	if tankQueueText ~= "" or healQueueText ~= "" or dpsQueueText ~= "" then
+		satchelFound = true
+		if not MainFrame:IsShown() then
+			MainFrame:Show()
 		end
 	end
 	
 	textDatabase.tankdg1.textFrame:SetText(tankQueueText)
 	textDatabase.healdg1.textFrame:SetText(healQueueText)
 	textDatabase.dpsdg1.textFrame:SetText(dpsQueueText)
-end
-
-function foundSatchel(role, var) -- NOT CURRENTLY IN USE
-	satchelFound = true
-	if role == "tank" then
-		textDatabase.tankScanningText.textFrame:SetText(classScan[3])
-		textDatabase.tankScanningText.textFrame:SetTextColor(unpack(greenColor))
-		if not string.find(queueText, dungeonVar[var].Dungeon) then
-			queueText = queueText .. dungeonVar[var].Dungeon
-		end
-		textDatabase.tankdg1.textFrame:SetText(queueText)
-		if raidWarnNotify then
-			RaidNotice_AddMessage(RaidWarningFrame, ctaVar[1], ChatTypeInfo["RAID_WARNING"])
-		end
-		if not MainFrame:IsShown() then
-			MainFrame:Show()
-		end
-	elseif role == "heal" then
-		textDatabase.healScanningText.textFrame:SetText(classScan[3])
-		textDatabase.healScanningText.textFrame:SetTextColor(unpack(greenColor))
-		if not string.find(queueText, dungeonVar[var].Dungeon) then
-			queueText = queueText .. dungeonVar[var].Dungeon
-		end
-		textDatabase.healdg1.textFrame:SetText(queueText)
-		if raidWarnNotify then
-			RaidNotice_AddMessage(RaidWarningFrame, ctaVar[1], ChatTypeInfo["RAID_WARNING"])
-		end
-		if not MainFrame:IsShown() then
-			MainFrame:Show()
-		end
-	elseif role == "dps" then
-		textDatabase.dpsScanningText.textFrame:SetText(classScan[3])
-		textDatabase.dpsScanningText.textFrame:SetTextColor(unpack(greenColor))
-		if not string.find(queueText, dungeonVar[var].Dungeon) then
-			queueText = queueText .. dungeonVar[var].Dungeon
-		end
-		textDatabase.dpsdg1.textFrame:SetText(queueText)
-		if raidWarnNotify then
-			RaidNotice_AddMessage(RaidWarningFrame, ctaVar[1], ChatTypeInfo["RAID_WARNING"])
-		end
-		if not MainFrame:IsShown() then
-			MainFrame:Show()
-		end
-	end
-end
-
-function noSatchel(role, var) -- NOT CURRENTLY IN USE
-	if role == "tank" then
-		if string.find(queueText, dungeonVar[var].Dungeon) then
-			queueText:gsub(dungeonVar[var].Dungeon,"")
-			if queueText ~= "" then
-				textDatabase.tankdg1.textFrame:SetText(queueText)
-			else
-				textDatabase.tankdg1.textFrame:SetText(scanVar[2])
-			end
-		else
-			textDatabase.tankdg1.textFrame:SetText(scanVar[2])
-		end
-		textDatabase.tankScanningText.textFrame:SetText(classScan[2])
-		textDatabase.tankScanningText.textFrame:SetTextColor(unpack(yellowColor))
-	elseif role == "heal" then
-		if string.find(queueText, dungeonVar[var].Dungeon) then
-			queueText:gsub(dungeonVar[var].Dungeon,"")
-			if queueText ~= "" then
-				textDatabase.healdg1.textFrame:SetText(queueText)
-			else
-				textDatabase.healdg1.textFrame:SetText(scanVar[2])
-			end
-		else
-			textDatabase.healdg1.textFrame:SetText(scanVar[2])
-		end
-		textDatabase.healScanningText.textFrame:SetText(classScan[2])
-		textDatabase.healScanningText.textFrame:SetTextColor(unpack(yellowColor))
-	elseif role == "dps" then
-		if string.find(queueText, dungeonVar[var].Dungeon) then
-			queueText:gsub(dungeonVar[var].Dungeon,"")
-			if queueText ~= "" then
-				textDatabase.dpsdg1.textFrame:SetText(queueText)
-			else
-				textDatabase.dpsdg1.textFrame:SetText(scanVar[2])
-			end
-		else
-			textDatabase.dpsdg1.textFrame:SetText(scanVar[2])
-		end
-		textDatabase.dpsScanningText.textFrame:SetText(classScan[2])
-		textDatabase.dpsScanningText.textFrame:SetTextColor(unpack(yellowColor))
-	end
 end
 
 function uiConfig() -- Draws Config Panel --
