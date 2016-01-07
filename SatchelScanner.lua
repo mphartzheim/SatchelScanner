@@ -391,7 +391,7 @@ function uiConfig() -- Draws Config Panel --
   --WOD CheckBox
   scanForWoDButton = CreateFrame("CheckButton", nil, SatchelScanner.childpanel, "ChatConfigCheckButtonTemplate")
   scanForWoDButton:SetPoint("TOPLEFT", 170, -50)
-   scanForWoDText = SatchelScanner.childpanel:CreateFontString(nil, "OVERLAY")
+  scanForWoDText = SatchelScanner.childpanel:CreateFontString(nil, "OVERLAY")
   scanForWoDText:SetFont("Interface\\Addons\\SatchelScanner\\fonts\\font.TTF", 14, "OUTLINE")
   scanForWoDText:SetPoint("TOPLEFT", 192, -54)
   scanForWoDText:SetText("Scan for WoD Heroics")
@@ -405,7 +405,7 @@ function uiConfig() -- Draws Config Panel --
   --LFR CheckBox
   scanForLFRButton = CreateFrame("CheckButton", nil, SatchelScanner.childpanel, "ChatConfigCheckButtonTemplate")
   scanForLFRButton:SetPoint("TOPLEFT", 170, -90)
-   scanForLFRText = SatchelScanner.childpanel:CreateFontString(nil, "OVERLAY")
+  scanForLFRText = SatchelScanner.childpanel:CreateFontString(nil, "OVERLAY")
   scanForLFRText:SetFont("Interface\\Addons\\SatchelScanner\\fonts\\font.TTF", 14, "OUTLINE")
   scanForLFRText:SetPoint("TOPLEFT", 192, -94)
   scanForLFRText:SetText("Scan for Looking for Raid")
@@ -418,14 +418,14 @@ function uiConfig() -- Draws Config Panel --
   -- Sound CheckBox
   playSoundButton = CreateFrame("CheckButton", nil, SatchelScanner.childpanel, "ChatConfigCheckButtonTemplate")
   playSoundButton:SetPoint("TOPLEFT", 8, -138)
-   playSoundText = SatchelScanner.childpanel:CreateFontString(nil, "OVERLAY")
+  playSoundText = SatchelScanner.childpanel:CreateFontString(nil, "OVERLAY")
   playSoundText:SetFont("Interface\\Addons\\SatchelScanner\\fonts\\font.TTF", 14, "OUTLINE")
   playSoundText:SetPoint("TOPLEFT", 30, -142)
   playSoundText:SetText("Play Soundwarning")
   -- Raidwarning CheckBox
   raidWarningButton = CreateFrame("CheckButton", nil, SatchelScanner.childpanel, "ChatConfigCheckButtonTemplate")
   raidWarningButton:SetPoint("TOPLEFT", 8, -154)
-   raidWarningText = SatchelScanner.childpanel:CreateFontString(nil, "OVERLAY")
+  raidWarningText = SatchelScanner.childpanel:CreateFontString(nil, "OVERLAY")
   raidWarningText:SetFont("Interface\\Addons\\SatchelScanner\\fonts\\font.TTF", 14, "OUTLINE")
   raidWarningText:SetPoint("TOPLEFT", 30, -158)
   raidWarningText:SetText("Show Raidwarning")
@@ -455,7 +455,7 @@ function uiConfig() -- Draws Config Panel --
   -- Auto Start CheckBox
   autoStartButton = CreateFrame("CheckButton", nil, SatchelScanner.childpanel, "ChatConfigCheckButtonTemplate")
   autoStartButton:SetPoint("TOPLEFT", 8, -244)
-   autoStartText = SatchelScanner.childpanel:CreateFontString(nil, "OVERLAY")
+  autoStartText = SatchelScanner.childpanel:CreateFontString(nil, "OVERLAY")
   autoStartText:SetFont("Interface\\Addons\\SatchelScanner\\fonts\\font.TTF", 14, "OUTLINE")
   autoStartText:SetPoint("TOPLEFT", 30, -248)
   autoStartText:SetText("Auto Start Scanning")
