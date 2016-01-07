@@ -1,0 +1,10 @@
+## Interface: 60100
+## Title: |cFF0080FFSatchelScanner|r
+## Notes: Scans for Satchels found within the LFD tool.
+## Version: 2.3.1
+## Author: Exzu
+## Modified by: Seintefie
+## SavedVariablesPerCharacter: SatchelScannerDB
+
+SatchelScanner.lua
+SatchelScanner.xml
