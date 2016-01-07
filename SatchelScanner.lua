@@ -1,5 +1,20 @@
--- Coded by: Exzu / EU-Aszune
--- Modified by: Seintefie / US-Thrall
+-- Coded by: joypunk aka Seintefie / US-Thrall
+-- Based on: Satchel Scanner by Exzu / EU-Aszune with modifications inspired by curse.com user dardack
+
+-- This file is part of <temp name>.
+
+-- <temp name> is free software: you can redistribute it and/or modify
+-- it under the terms of the GNU General Public License as published by
+-- the Free Software Foundation, either version 3 of the License, or
+-- (at your option) any later version.
+
+-- <temp name> is distributed in the hope that it will be useful,
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-- GNU General Public License for more details.
+
+-- You should have received a copy of the GNU General Public License
+-- along with <temp name>.  If not, see <http://www.gnu.org/licenses/>.
 
 local textDatabase = {
   ANT = { outLine = "OUTLINE", fontSize = "14", loc = "TOP", x = 0, y = 8, color = {1, 1, 1, 1}, text = "", },
@@ -41,7 +56,7 @@ local scanForTW = true
 local scanForLFR = true
 local scanStopped = false
 local runVar = {"Not Running", "Running"}
-local addonVersion = "2.3.1"
+local addonVersion = "0.1.0"
 local satchelFound = false
 local satchelsReceived
 local showUI = true
@@ -54,22 +69,22 @@ local classQueues = {false, false, false}
 -- Dungeon Scan Var
 local scanVar = {"# ...", "# Searching..."}
 local dungeonVar = {
-  [789]  = {Type = "WoD", Dungeon = " Heroic ", Tank = false, Heal = false, DPS = false},
-  [744]  = {Type = "TW",  Dungeon = " BC ",     Tank = false, Heal = false, DPS = false},
-  [995]  = {Type = "TW",  Dungeon = " LK ",     Tank = false, Heal = false, DPS = false},
-  [1146] = {Type = "TW",  Dungeon = " Cata ",   Tank = false, Heal = false, DPS = false},
-  [849]  = {Type = "LFR", Dungeon = " WC ",     Tank = false, Heal = false, DPS = false},
-  [850]  = {Type = "LFR", Dungeon = " AS ",     Tank = false, Heal = false, DPS = false},
-  [851]  = {Type = "LFR", Dungeon = " IR ",     Tank = false, Heal = false, DPS = false},
-  [847]  = {Type = "LFR", Dungeon = " SW ",     Tank = false, Heal = false, DPS = false},
-  [846]  = {Type = "LFR", Dungeon = " TBF ",    Tank = false, Heal = false, DPS = false},
-  [848]  = {Type = "LFR", Dungeon = " IA ",     Tank = false, Heal = false, DPS = false},
-  [823]  = {Type = "LFR", Dungeon = " BC ",     Tank = false, Heal = false, DPS = false},
-  [982]  = {Type = "LFR", Dungeon = " HB ",     Tank = false, Heal = false, DPS = false},
-  [983]  = {Type = "LFR", Dungeon = " HoB ",    Tank = false, Heal = false, DPS = false},
-  [984]  = {Type = "LFR", Dungeon = " BoS ",    Tank = false, Heal = false, DPS = false},
-  [985]  = {Type = "LFR", Dungeon = " DR ",     Tank = false, Heal = false, DPS = false},
-  [986]  = {Type = "LFR", Dungeon = " TBG ",    Tank = false, Heal = false, DPS = false},
+  [789]  = {Type = "WoD", Dungeon = " Heroic ", Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [744]  = {Type = "TW",  Dungeon = " BC ",     Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [995]  = {Type = "TW",  Dungeon = " LK ",     Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [1146] = {Type = "TW",  Dungeon = " Cata ",   Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [849]  = {Type = "LFR", Dungeon = " WC ",     Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [850]  = {Type = "LFR", Dungeon = " AS ",     Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [851]  = {Type = "LFR", Dungeon = " IR ",     Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [847]  = {Type = "LFR", Dungeon = " SW ",     Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [846]  = {Type = "LFR", Dungeon = " TBF ",    Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [848]  = {Type = "LFR", Dungeon = " IA ",     Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [823]  = {Type = "LFR", Dungeon = " BC ",     Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [982]  = {Type = "LFR", Dungeon = " HB ",     Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [983]  = {Type = "LFR", Dungeon = " HoB ",    Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [984]  = {Type = "LFR", Dungeon = " BoS ",    Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [985]  = {Type = "LFR", Dungeon = " DR ",     Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
+  [986]  = {Type = "LFR", Dungeon = " TBG ",    Tank = false, Heal = false, DPS = false, Enabled = true, RaidWarn = false, SoundWarn = false},
 }
 local classScan = {"Not Scanning...","Scanning...","Satchel Found!"}
 local ctaVar = {"Call to Arms: Tank","Call to Arms: Healer","Call to Arms: Dps"}
@@ -254,21 +269,21 @@ end
 
 function classScanner(id)
   classQueues = satchelFinder(id)
-  if scanForTank and classQueues[1] then
+  if scanForTank and classQueues[1] and dungeonVar[id].Enabled then
     dungeonVar[id].Tank = true
   else
     dungeonVar[id].Tank = false
     textDatabase.tankScanningText.textFrame:SetText(classScan[2])
     textDatabase.tankScanningText.textFrame:SetTextColor(unpack(yellowColor))
   end
-  if scanForHeal and classQueues[2] then
+  if scanForHeal and classQueues[2] and dungeonVar[id].Enabled  then
     dungeonVar[id].Heal = true
   else
     dungeonVar[id].Heal = false
     textDatabase.healScanningText.textFrame:SetText(classScan[2])
     textDatabase.healScanningText.textFrame:SetTextColor(unpack(yellowColor))
   end
-  if scanForDps and classQueues[3] then
+  if scanForDps and classQueues[3] and dungeonVar[id].Enabled  then
     dungeonVar[id].DPS = true
   else
     dungeonVar[id].DPS = false
@@ -302,11 +317,13 @@ function buildQueueText()
       textDatabase.dpsScanningText.textFrame:SetTextColor(unpack(greenColor))
     end
   end
-
+  
   -- Raid Warning, Sounds, and resetting Queue Variable if nothing found
   if tankQueueText == "" then
     tankQueueText = scanVar[2]
   else
+    -- Remove final "|" character - for use with temporary concatenation
+    tankQueueText = string.sub(tankQueueText,1,-3)
     if raidWarnNotify then
       RaidNotice_AddMessage(RaidWarningFrame, ctaVar[1], ChatTypeInfo["RAID_WARNING"])
     end
@@ -314,6 +331,8 @@ function buildQueueText()
   if healQueueText == "" then
     healQueueText = scanVar[2]
   else
+    -- Remove final "|" character - for use with temporary concatenation
+    healQueueText = string.sub(healQueueText,1,-3)
     if raidWarnNotify then
       RaidNotice_AddMessage(RaidWarningFrame, ctaVar[2], ChatTypeInfo["RAID_WARNING"])
     end
@@ -321,6 +340,8 @@ function buildQueueText()
   if dpsQueueText == "" then
     dpsQueueText = scanVar[2]
   else
+    -- Remove final "|" character - for use with temporary concatenation
+    dpsQueueText = string.sub(dpsQueueText,1,-3)
     if raidWarnNotify then
       RaidNotice_AddMessage(RaidWarningFrame, ctaVar[3], ChatTypeInfo["RAID_WARNING"])
     end
