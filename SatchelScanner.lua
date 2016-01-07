@@ -54,22 +54,22 @@ local classQueues = {false, false, false}
 -- Dungeon Scan Var
 local scanVar = {"# ...", "# Searching..."}
 local dungeonVar = {
-	[789]  = {Type = "WoD",	Dungeon = " Heroic ",	Tank = false,	Heal = false,	DPS = false},
-	[744]  = {Type = "TW",	Dungeon = " BC ",		Tank = false,	Heal = false,	DPS = false},
-	[995]  = {Type = "TW",	Dungeon = " LK ",		Tank = false,	Heal = false,	DPS = false},
-	[1146] = {Type = "TW",	Dungeon = " Cata ",		Tank = false,	Heal = false,	DPS = false},
-	[849]  = {Type = "LFR",	Dungeon = " WC ",		Tank = false,	Heal = false,	DPS = false},
-	[850]  = {Type = "LFR",	Dungeon = " AS ",		Tank = false,	Heal = false,	DPS = false},
-	[851]  = {Type = "LFR",	Dungeon = " IR ",		Tank = false,	Heal = false,	DPS = false},
-	[847]  = {Type = "LFR",	Dungeon = " SW ",		Tank = false,	Heal = false,	DPS = false},
-	[846]  = {Type = "LFR",	Dungeon = " TBF ",		Tank = false,	Heal = false,	DPS = false},
-	[848]  = {Type = "LFR",	Dungeon = " IA ",		Tank = false,	Heal = false,	DPS = false},
-	[823]  = {Type = "LFR",	Dungeon = " BC ",		Tank = false,	Heal = false,	DPS = false},
-	[982]  = {Type = "LFR",	Dungeon = " HB ",		Tank = false,	Heal = false,	DPS = false},
-	[983]  = {Type = "LFR",	Dungeon = " HoB ",		Tank = false,	Heal = false,	DPS = false},
-	[984]  = {Type = "LFR",	Dungeon = " BoS ",		Tank = false,	Heal = false,	DPS = false},
-	[985]  = {Type = "LFR",	Dungeon = " DR ",		Tank = false,	Heal = false,	DPS = false},
-	[986]  = {Type = "LFR",	Dungeon = " TBG ",		Tank = false,	Heal = false,	DPS = false},
+	[789]  = {Type = "WoD", Dungeon = " Heroic ", Tank = false, Heal = false, DPS = false},
+	[744]  = {Type = "TW",  Dungeon = " BC ",     Tank = false, Heal = false, DPS = false},
+	[995]  = {Type = "TW",  Dungeon = " LK ",     Tank = false, Heal = false, DPS = false},
+	[1146] = {Type = "TW",  Dungeon = " Cata ",   Tank = false, Heal = false, DPS = false},
+	[849]  = {Type = "LFR", Dungeon = " WC ",     Tank = false, Heal = false, DPS = false},
+	[850]  = {Type = "LFR", Dungeon = " AS ",     Tank = false, Heal = false, DPS = false},
+	[851]  = {Type = "LFR", Dungeon = " IR ",     Tank = false, Heal = false, DPS = false},
+	[847]  = {Type = "LFR", Dungeon = " SW ",     Tank = false, Heal = false, DPS = false},
+	[846]  = {Type = "LFR", Dungeon = " TBF ",    Tank = false, Heal = false, DPS = false},
+	[848]  = {Type = "LFR", Dungeon = " IA ",     Tank = false, Heal = false, DPS = false},
+	[823]  = {Type = "LFR", Dungeon = " BC ",     Tank = false, Heal = false, DPS = false},
+	[982]  = {Type = "LFR", Dungeon = " HB ",     Tank = false, Heal = false, DPS = false},
+	[983]  = {Type = "LFR", Dungeon = " HoB ",    Tank = false, Heal = false, DPS = false},
+	[984]  = {Type = "LFR", Dungeon = " BoS ",    Tank = false, Heal = false, DPS = false},
+	[985]  = {Type = "LFR", Dungeon = " DR ",     Tank = false, Heal = false, DPS = false},
+	[986]  = {Type = "LFR", Dungeon = " TBG ",    Tank = false, Heal = false, DPS = false},
 }
 local classScan = {"Not Scanning...","Scanning...","Satchel Found!"}
 local ctaVar = {"Call to Arms: Tank","Call to Arms: Healer","Call to Arms: Dps"}
