@@ -236,6 +236,12 @@ function SatchelScan(self, event, arg, arg2)
   end
   if running then
     if event == "LFG_UPDATE_RANDOM_INFO" then
+      -- Reset flags to pick up any changes
+      for id in pairs(dungeonVar) do
+        dungeonVar[id].Tank = false
+        dungeonVar[id].Heal = false
+        dungeonVar[id].DPS = false
+      end
       -- Scan WoD Heroics
       if scanForWoD then
         classScanner(789)
@@ -480,6 +486,7 @@ function uiConfig() -- Draws Config Panel --
   autoStartText:SetFont("Interface\\Addons\\SatchelScanner\\fonts\\font.TTF", 14, "OUTLINE")
   autoStartText:SetPoint("TOPLEFT", 30, -248)
   autoStartText:SetText("Auto Start Scanning")
+  
 end
 
 function drawFrames() -- Draws the MainFrame --
