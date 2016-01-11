@@ -58,48 +58,48 @@ title:SetText("SellSword "..GetAddOnMetadata("SellSword", "Version"))
 local features = addSubCategory(SellSwordOptions, "Features")
 features:SetPoint("TOPLEFT", 16, -80)
 
-local autoStartBox = createToggleBox(SellSwordOptions, "autoStart", "Auto Start")
+local autoStartBox = createToggleBox(SellSwordOptions, "sso_autoStart", "Auto Start")
 autoStartBox:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -20)
 
-local intervalTimerSlider = CreateFrame("Slider", "intervalTimer", SellSwordOptions, "OptionsSliderTemplate")
-local intervalTimerText2 = SellSwordOptions:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+local intervalTimerSlider = CreateFrame("Slider", "sso_intervalTimer", SellSwordOptions, "OptionsSliderTemplate")
+local intervalTimerValueText = SellSwordOptions:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
 intervalTimerSlider:SetPoint("LEFT", autoStartBox, "RIGHT", 195, 0)
 BlizzardOptionsPanel_Slider_Enable(intervalTimerSlider)
 intervalTimerSlider:SetMinMaxValues(1,10)
 intervalTimerSlider:SetValueStep(1)
 intervalTimerSlider:SetObeyStepOnDrag(true)
-intervalTimerText:SetText("Interval to Scan (in seconds)")
-intervalTimerText2:SetPoint("LEFT", intervalTimerSlider, "RIGHT", 10, 0)
-intervalTimerSlider:SetScript("OnValueChanged", function(self) intervalTimerText2:SetText(intervalTimerSlider:GetValue()) end)
+sso_intervalTimerText:SetText("Interval to Scan (in seconds)")
+intervalTimerValueText:SetPoint("LEFT", intervalTimerSlider, "RIGHT", 10, 0)
+intervalTimerSlider:SetScript("OnValueChanged", function(self) intervalTimerValueText:SetText(intervalTimerSlider:GetValue()) end)
 
-local raidWarnBox = createToggleBox(SellSwordOptions, "raidWarn", "Play Raid Warnings")
+local raidWarnBox = createToggleBox(SellSwordOptions, "sso_raidWarn", "Play Raid Warnings")
 raidWarnBox:SetPoint("TOPLEFT", autoStartBox, "BOTTOMLEFT", 0, -8)
 
-local soundWarnBox = createToggleBox(SellSwordOptions, "soundWarn", "Play Sound Warnings")
+local soundWarnBox = createToggleBox(SellSwordOptions, "sso_soundWarn", "Play Sound Warnings")
 soundWarnBox:SetPoint("LEFT", raidWarnBox, "RIGHT", 180, 0)
 
 local queueTypes = addSubCategory(SellSwordOptions, "Queue Types")
 queueTypes:SetPoint("TOPLEFT", raidWarnBox, "BOTTOMLEFT", 0, -30)
 
-local scanForTankBox = createToggleBox(SellSwordOptions, "scanForTanks", "Scan Tank Queues")
+local scanForTankBox = createToggleBox(SellSwordOptions, "sso_scanForTanks", "Scan Tank Queues")
 scanForTankBox:SetPoint("TOPLEFT", queueTypes, "BOTTOMLEFT", 0, -20)
 
-local scanForHealBox = createToggleBox(SellSwordOptions, "scanForHeal", "Scan Healer Queues")
+local scanForHealBox = createToggleBox(SellSwordOptions, "sso_scanForHeal", "Scan Healer Queues")
 scanForHealBox:SetPoint("LEFT", scanForTankBox, "Right", 180, 0)
 
-local scanForDPSBox = createToggleBox(SellSwordOptions, "scanForDPS", "Scan DPS Queues")
+local scanForDPSBox = createToggleBox(SellSwordOptions, "sso_scanForDPS", "Scan DPS Queues")
 scanForDPSBox:SetPoint("TOPLEFT", scanForTankBox, "BOTTOMLEFT", 0, -8)
 
 local dungeonTypes = addSubCategory(SellSwordOptions, "Dungeon Types")
 dungeonTypes:SetPoint("TOPLEFT", scanForDPSBox, "BOTTOMLEFT", 0, -30)
 
-local scanForWoDBox = createToggleBox(SellSwordOptions, "scanForWoD", "Scan WoD Heroics")
+local scanForWoDBox = createToggleBox(SellSwordOptions, "sso_scanForWoD", "Scan WoD Heroics")
 scanForWoDBox:SetPoint("TOPLEFT", dungeonTypes, "BOTTOMLEFT", 0, -20)
 
-local scanForTWBox = createToggleBox(SellSwordOptions, "scanForTW", "Scan TimeWalking")
+local scanForTWBox = createToggleBox(SellSwordOptions, "sso_scanForTW", "Scan TimeWalking")
 scanForTWBox:SetPoint("LEFT", scanForWoDBox, "Right", 180, 0)
 
-local scanForLFRBox = createToggleBox(SellSwordOptions, "scanForLFR", "Scan Looking for Raid")
+local scanForLFRBox = createToggleBox(SellSwordOptions, "sso_scanForLFR", "Scan Looking for Raid")
 scanForLFRBox:SetPoint("TOPLEFT", scanForWoDBox, "BOTTOMLEFT", 0, -8)
 
 local credits = SellSwordOptions:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
