@@ -1,2 +1,1 @@
-# SatchelScanner
-# Testing Git Please Ignore
+# SellSword - A Call to Arms Rewards Finder
