@@ -3,7 +3,7 @@
   <Scripts>
     <OnLoad>
       SellSword_OnLoad(self);
-	  self.TimeSinceLastUpdate = 0
+	    self.TimeSinceLastUpdate = 0
     </OnLoad>
 	<OnUpdate function="SellSword_OnUpdate"/>
   </Scripts>
