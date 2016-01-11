@@ -21,6 +21,7 @@
 ## along with SellSword.  If not, see <http://www.gnu.org/licenses/>.
 
 ## SavedVariables: SellSwordDB
+## SavedVariablesPerCharacter: SellSwordCharDB
 
 # Core files
 SellSword.lua

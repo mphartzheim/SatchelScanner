@@ -16,9 +16,48 @@
 -- You should have received a copy of the GNU General Public License
 -- along with SellSword.  If not, see <http://www.gnu.org/licenses/>.
 
-function SellSword_OnLoad()
-  -- Do Stuff
-end
+
+local addon, C = ...
+
+SellSwordDB = {}
+SellSwordCharDB = {}
+
+C.charDefaults = {
+  ["sso_autoStart"] = true,
+  ["sso_intervalTimer"] = 3,
+  ["sso_raidWarn"] = false,
+  ["sso_soundWarn"] = false,
+  ["sso_scanForTanks"] = true,
+  ["sso_scanForHeal"] = true,
+  ["sso_scanForDPS"] = true,
+  ["sso_scanForWoD"] = true,
+  ["sso_scanForTW"] = true,
+  ["sso_scanForLFR"] = true,
+}
+
+local SellSword = CreateFrame("Frame", "SellSwordFrame", UIParent)
+SellSwordFrame:RegisterEvent("ADDON_LOADED")
+SellSwordFrame:SetScript("OnEvent", function(self, event, arg1)
+  if event == "ADDON_LOADED" and arg1 == "SellSword" then
+    local function copyCharDefaults(sv, df)
+      if type(sv) ~= "table" then sv = {} end
+      if type(df) ~= "table" then return sv end
+      for k, v in pairs(df) do
+        if type(v) == "table" then
+          sv[k] = copyCharDefaults(sv[k], v)
+        elseif type(v) ~= type(sv[k]) then
+          sv[k] = v
+        end
+      end
+      return sv
+    end
+
+    SellSwordCharDB = copyCharDefaults(SellSwordCharDB, C.charDefaults)
+    self.charDB = SellSwordCharDB
+    self:UnregisterEvent("ADDON_LOADED")
+  end
+
+end)
 
 -- Scanner
 -- function satchelFinder(id)
