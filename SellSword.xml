@@ -2,10 +2,10 @@
   <Frame>
   <Scripts>
     <OnLoad>
-      SatchelScanner_OnLoad(self);
-	  self.TimeSinceLastUpdate = 0 
+      SellSword_OnLoad(self);
+	  self.TimeSinceLastUpdate = 0
     </OnLoad>
-	<OnUpdate function="SatchelScanner_OnUpdate"/> 
+	<OnUpdate function="SellSword_OnUpdate"/>
   </Scripts>
   </Frame>
 </Ui>
