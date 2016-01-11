@@ -31,7 +31,7 @@ local function addSubCategory(parent, name)
 end
 
 local function toggle(f)
-	SatchelScannerConfig[f.value] = f:GetChecked()
+	SellSwordConfig[f.value] = f:GetChecked()
 end
 
 local function createToggleBox(parent, value, text)
@@ -47,22 +47,22 @@ local function createToggleBox(parent, value, text)
 	return f
 end
 
-local SatchelOptions = CreateFrame("Frame", "SatchelOptions", UIParent)
-SatchelOptions.name = "Satchel"
-InterfaceOptions_AddCategory(SatchelOptions)
+local SellSwordOptions = CreateFrame("Frame", "SellSwordOptions", UIParent)
+SellSwordOptions.name = "SellSword"
+InterfaceOptions_AddCategory(SellSwordOptions)
 
-local title = SatchelOptions:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
-title:SetPoint("TOP", 0, -26)
-title:SetText("Satchel Scanner "..GetAddOnMetadata("SatchelScanner", "Version"))
+local title = SellSwordOptions:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+title:SetPoint("TOP", -90, -26)
+title:SetText("SellSword "..GetAddOnMetadata("SellSword", "Version"))
 
-local features = addSubCategory(SatchelOptions, "Features")
+local features = addSubCategory(SellSwordOptions, "Features")
 features:SetPoint("TOPLEFT", 16, -80)
 
-local autoStartBox = createToggleBox(SatchelOptions, "autoStart", "Auto Start")
+local autoStartBox = createToggleBox(SellSwordOptions, "autoStart", "Auto Start")
 autoStartBox:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -20)
 
-local intervalTimerSlider = CreateFrame("Slider", "intervalTimer", SatchelOptions, "OptionsSliderTemplate")
-local intervalTimerText2 = SatchelOptions:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+local intervalTimerSlider = CreateFrame("Slider", "intervalTimer", SellSwordOptions, "OptionsSliderTemplate")
+local intervalTimerText2 = SellSwordOptions:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
 intervalTimerSlider:SetPoint("LEFT", autoStartBox, "RIGHT", 195, 0)
 BlizzardOptionsPanel_Slider_Enable(intervalTimerSlider)
 intervalTimerSlider:SetMinMaxValues(1,10)
@@ -72,48 +72,48 @@ intervalTimerText:SetText("Interval to Scan (in seconds)")
 intervalTimerText2:SetPoint("LEFT", intervalTimerSlider, "RIGHT", 10, 0)
 intervalTimerSlider:SetScript("OnValueChanged", function(self) intervalTimerText2:SetText(intervalTimerSlider:GetValue()) end)
 
-local raidWarnBox = createToggleBox(SatchelOptions, "raidWarn", "Play Raid Warnings")
+local raidWarnBox = createToggleBox(SellSwordOptions, "raidWarn", "Play Raid Warnings")
 raidWarnBox:SetPoint("TOPLEFT", autoStartBox, "BOTTOMLEFT", 0, -8)
 
-local soundWarnBox = createToggleBox(SatchelOptions, "soundWarn", "Play Sound Warnings")
+local soundWarnBox = createToggleBox(SellSwordOptions, "soundWarn", "Play Sound Warnings")
 soundWarnBox:SetPoint("LEFT", raidWarnBox, "RIGHT", 180, 0)
 
-local queueTypes = addSubCategory(SatchelOptions, "Queue Types")
+local queueTypes = addSubCategory(SellSwordOptions, "Queue Types")
 queueTypes:SetPoint("TOPLEFT", raidWarnBox, "BOTTOMLEFT", 0, -30)
 
-local scanForTankBox = createToggleBox(SatchelOptions, "scanForTanks", "Scan for Tank Satchels")
+local scanForTankBox = createToggleBox(SellSwordOptions, "scanForTanks", "Scan Tank Queues")
 scanForTankBox:SetPoint("TOPLEFT", queueTypes, "BOTTOMLEFT", 0, -20)
 
-local scanForHealBox = createToggleBox(SatchelOptions, "scanForHeal", "Scan for Healer Satchels")
+local scanForHealBox = createToggleBox(SellSwordOptions, "scanForHeal", "Scan Healer Queues")
 scanForHealBox:SetPoint("LEFT", scanForTankBox, "Right", 180, 0)
 
-local scanForDPSBox = createToggleBox(SatchelOptions, "scanForDPS", "Scan for DPS Satchels")
+local scanForDPSBox = createToggleBox(SellSwordOptions, "scanForDPS", "Scan DPS Queues")
 scanForDPSBox:SetPoint("TOPLEFT", scanForTankBox, "BOTTOMLEFT", 0, -8)
 
-local dungeonTypes = addSubCategory(SatchelOptions, "Dungeon Types")
+local dungeonTypes = addSubCategory(SellSwordOptions, "Dungeon Types")
 dungeonTypes:SetPoint("TOPLEFT", scanForDPSBox, "BOTTOMLEFT", 0, -30)
 
-local scanForWoDBox = createToggleBox(SatchelOptions, "scanForWoD", "Scan for WoD Heroics")
+local scanForWoDBox = createToggleBox(SellSwordOptions, "scanForWoD", "Scan WoD Heroics")
 scanForWoDBox:SetPoint("TOPLEFT", dungeonTypes, "BOTTOMLEFT", 0, -20)
 
-local scanForTWBox = createToggleBox(SatchelOptions, "scanForTW", "Scan for TimeWalking")
+local scanForTWBox = createToggleBox(SellSwordOptions, "scanForTW", "Scan TimeWalking")
 scanForTWBox:SetPoint("LEFT", scanForWoDBox, "Right", 180, 0)
 
-local scanForLFRBox = createToggleBox(SatchelOptions, "scanForLFR", "Scan for Looking for Raid")
+local scanForLFRBox = createToggleBox(SellSwordOptions, "scanForLFR", "Scan Looking for Raid")
 scanForLFRBox:SetPoint("TOPLEFT", scanForWoDBox, "BOTTOMLEFT", 0, -8)
 
-local credits = SatchelOptions:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
-credits:SetText("Satchel Scanner by joypunk aka Seintefie / US-Thrall")
-credits:SetPoint("BOTTOM", 0, 40)
+local credits = SellSwordOptions:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+credits:SetText("SellSword by joypunk aka Seintefie / US-Thrall")
+credits:SetPoint("BOTTOM", -80, 40)
 
-SatchelOptions:RegisterEvent("ADDON_LOADED")
-SatchelOptions:SetScript("OnEvent", function(self, _, addon)
-	if addon ~= "SatchelScanner" then return end
-
-		self:UnregisterEvent("ADDON_LOADED")
+SellSwordOptions:RegisterEvent("ADDON_LOADED")
+SellSwordOptions:SetScript("OnEvent", function(self, _, addon)
+	if addon ~= "SellSword" then return end
+	self:UnregisterEvent("ADDON_LOADED")
 end)
 
-SlashCmdList.SatchelScanner = function()
-	InterfaceOptionsFrame_OpenToCategory(SatchelOptions)
+SlashCmdList.SellSword = function()
+	InterfaceOptionsFrame_OpenToCategory(SellSwordOptions)
 end
-SLASH_SatchelScanner1 = "/satchel"
+SLASH_SellSword1 = "/SellSword"
+SLASH_SellSword2 = "/ss"
