@@ -1,5 +1,5 @@
 # SellSword - A Call to Arms Rewards Finder
-Admit it. The only reason you even to LFG Heroics or Raids anymore is for the bonus rewards from Call to Arms queues. You know what that makes you? A mercenary. A sellsword. That's okay, embrace it! I'm one as well!
+Admit it. The only reason you even run LFG Heroics or Raids anymore is for the bonus rewards from Call to Arms queues. You know what that makes you? A mercenary. A sellsword. That's okay, embrace it! I'm one as well!
 
 This addon will scan the LFG queues and notify you when one of them has a Call to Arms reward attached to it. Inspired by the Satchel Scanner addon, this addon also tracks Timewalking rewards as well as Looking for Raid rewards.
 
