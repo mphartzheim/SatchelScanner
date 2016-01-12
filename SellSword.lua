@@ -52,9 +52,9 @@ C.charDefaults = {
   ["sso_scanForLFR_HFC_BG"] = true,
 }
 
-local SellSword = CreateFrame("Frame", "SellSwordFrame", UIParent)
-SellSwordFrame:RegisterEvent("ADDON_LOADED")
-SellSwordFrame:SetScript("OnEvent", function(self, event, arg1)
+local sellSword = CreateFrame("Frame", "sellSwordFrame", UIParent)
+sellSwordFrame:RegisterEvent("ADDON_LOADED")
+sellSwordFrame:SetScript("OnEvent", function(self, event, arg1)
   if event == "ADDON_LOADED" and arg1 == "SellSword" then
     local function copyCharDefaults(sv, df)
       if type(sv) ~= "table" then sv = {} end
@@ -77,38 +77,90 @@ SellSwordFrame:SetScript("OnEvent", function(self, event, arg1)
 end)
 
 -- Testing GUI Stuff
--- Successfully creates a frame that's movable, but cannot get text to display on it yet.
--- the 't.text' variable stuff is supposed to display text but it ain't working.
-SellSword:SetMovable(true)
-SellSword:EnableMouse(true)
-SellSword:SetScript("OnMouseDown", function(self, button)
-  if button == "LeftButton" and not self.isMoving then
-    self:StartMoving()
-    self.isMoving = true
-  end
+local ssf = sellSwordFrame
+ssf.width = 250
+ssf.height = 150
+ssf:SetFrameStrata("BACKGROUND")
+ssf:SetSize(ssf.width, ssf.height)
+ssf:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+ssf:SetBackdrop({
+	bgFile   = "Interface\\DialogFrame\\UI-DialogBox-Background",
+	-- edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+	-- tile     = true,
+	-- tileSize = 32,
+	-- edgeSize = 32,
+	-- insets   = { left = 8, right = 8, top = 8, bottom = 8 }
+})
+ssf:SetBackdropColor(1, 0, 1, 0.75)
+ssf:EnableMouse(true)
+ssf:EnableMouseWheel(true)
+
+-- Make movable/resizable
+ssf:SetMovable(true)
+ssf:SetResizable(enable)
+ssf:SetMinResize(100, 100)
+ssf:RegisterForDrag("LeftButton")
+ssf:SetScript("OnDragStart", ssf.StartMoving)
+ssf:SetScript("OnDragStop", ssf.StopMovingOrSizing)
+ssf:SetScript("OnHide", ssf.StopMovingOrSizing)
+
+tinsert(UISpecialFrames, "SellSwordFrame")
+
+-- -- Close button
+-- local closeButton = CreateFrame("Button", nil, ssf, "UIPanelButtonTemplate")
+-- closeButton:SetPoint("BOTTOM", 0, 10)
+-- closeButton:SetHeight(25)
+-- closeButton:SetWidth(70)
+-- closeButton:SetText(CLOSE)
+-- closeButton:SetScript("OnClick", function(self)
+-- 	HideParentPanel(self)
+-- end)
+-- ssf.closeButton = closeButton
+
+local messageFrame = CreateFrame("ScrollingMessageFrame", nil, ssf)
+messageFrame:SetPoint("TOPLEFT", ssf, "TOPLEFT", 20, 10) -- Annoying arbitrary numbers!
+messageFrame:SetSize(ssf.width, ssf.height - 20) -- Annoying arbitrary numbers!
+messageFrame:SetFontObject(GameFontNormal)
+messageFrame:SetTextColor(1, 1, 1, 1) -- default color
+messageFrame:SetJustifyH("LEFT")
+messageFrame:SetHyperlinksEnabled(true)
+messageFrame:SetFading(false)
+messageFrame:SetMaxLines(300)
+ssf.messageFrame = messageFrame
+
+for i = 1, 25 do
+	messageFrame:AddMessage(i .. ". Here is a message!")
+end
+
+-------------------------------------------------------------------------------
+-- Scroll bar
+-------------------------------------------------------------------------------
+local scrollBar = CreateFrame("Slider", nil, ssf, "UIPanelScrollBarTemplate")
+scrollBar:SetPoint("TOPLEFT", ssf, "TOPLEFT", -5, -17.5) -- Annoying arbitrary numbers!
+scrollBar:SetSize(30, ssf.height - 63) -- Annoying arbitrary numbers!
+scrollBar:SetMinMaxValues(0, ssf.height / 10) -- Max Value needs to adjust based on frame height and # of lines to show
+scrollBar:SetValueStep(1)
+scrollBar.scrollStep = 1
+ssf.scrollBar = scrollBar
+
+scrollBar:SetScript("OnValueChanged", function(self, value)
+	messageFrame:SetScrollOffset(select(2, scrollBar:GetMinMaxValues()) - value)
 end)
-SellSword:SetScript("OnMouseUp", function(self, button)
-  if button == "LeftButton" and self.isMoving then
-    self:StopMovingOrSizing()
-    self.isMoving = false
-  end
+
+scrollBar:SetValue(select(2, scrollBar:GetMinMaxValues()))
+
+ssf:SetScript("OnMouseWheel", function(self, delta)
+	local cur_val = scrollBar:GetValue()
+	local min_val, max_val = scrollBar:GetMinMaxValues()
+
+	if delta < 0 and cur_val < max_val then
+		cur_val = math.min(max_val, cur_val + 1)
+		scrollBar:SetValue(cur_val)
+	elseif delta > 0 and cur_val > min_val then
+		cur_val = math.max(min_val, cur_val - 1)
+		scrollBar:SetValue(cur_val)
+	end
 end)
-SellSword:SetScript("OnHide", function(self)
-  if ( self.isMoving ) then
-    self:StopMovingOrSizing()
-    self.isMoving = false
-  end
-end)
-SellSword:SetFrameStrata("BACKGROUND")
-SellSword:SetPoint("CENTER"); SellSword:SetWidth(300); SellSword:SetHeight(300)
-local t = SellSword:CreateTexture("ARTWORK")
-t.text = SellSword:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
-t.text:SetAllPoints(true)
-t.text:SetTextColor(0, 0, 0, 1)
-t.text:SetJustifyH("LEFT")
-t.text:SetJustifyV("TOP")
-t:SetAllPoints()
-t:SetTexture(1.0, 0.5, 0); t:SetAlpha(0.5)
 
 
 -- Scanner
