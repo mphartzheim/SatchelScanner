@@ -76,6 +76,41 @@ SellSwordFrame:SetScript("OnEvent", function(self, event, arg1)
 
 end)
 
+-- Testing GUI Stuff
+-- Successfully creates a frame that's movable, but cannot get text to display on it yet.
+-- the 't.text' variable stuff is supposed to display text but it ain't working.
+SellSword:SetMovable(true)
+SellSword:EnableMouse(true)
+SellSword:SetScript("OnMouseDown", function(self, button)
+  if button == "LeftButton" and not self.isMoving then
+    self:StartMoving()
+    self.isMoving = true
+  end
+end)
+SellSword:SetScript("OnMouseUp", function(self, button)
+  if button == "LeftButton" and self.isMoving then
+    self:StopMovingOrSizing()
+    self.isMoving = false
+  end
+end)
+SellSword:SetScript("OnHide", function(self)
+  if ( self.isMoving ) then
+    self:StopMovingOrSizing()
+    self.isMoving = false
+  end
+end)
+SellSword:SetFrameStrata("BACKGROUND")
+SellSword:SetPoint("CENTER"); SellSword:SetWidth(300); SellSword:SetHeight(300)
+local t = SellSword:CreateTexture("ARTWORK")
+t.text = SellSword:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+t.text:SetAllPoints(true)
+t.text:SetTextColor(0, 0, 0, 1)
+t.text:SetJustifyH("LEFT")
+t.text:SetJustifyV("TOP")
+t:SetAllPoints()
+t:SetTexture(1.0, 0.5, 0); t:SetAlpha(0.5)
+
+
 -- Scanner
 -- function satchelFinder(id)
 --   local eligible, forTank, forHealer, forDamage, itemCount, money, xp = GetLFGRoleShortageRewards(id, 1)
