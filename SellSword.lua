@@ -16,7 +16,6 @@
 -- You should have received a copy of the GNU General Public License
 -- along with SellSword.  If not, see <http://www.gnu.org/licenses/>.
 
-
 local addon, C = ...
 
 SellSwordDB = {}

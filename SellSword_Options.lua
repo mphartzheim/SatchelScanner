@@ -75,6 +75,7 @@ features:SetPoint("TOPLEFT", 16, -20)
 
 local autoStartBox = createToggleBox(SellSwordOptions, "sso_autoStart", "Auto Start")
 autoStartBox:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -15)
+autoStartBox.tooltip = "Start scanning for queue rewards automatically on logging in"
 
 local intervalTimerSlider = CreateFrame("Slider", "sso_intervalTimer", SellSwordOptions, "OptionsSliderTemplate")
 local intervalTimerValueText = SellSwordOptions:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
@@ -88,9 +89,11 @@ intervalTimerValueText:SetPoint("LEFT", intervalTimerSlider, "RIGHT", 10, 0)
 
 local raidWarnBox = createToggleBox(SellSwordOptions, "sso_raidWarn", "Play Raid Warnings")
 raidWarnBox:SetPoint("TOPLEFT", autoStartBox, "BOTTOMLEFT", 0, -8)
+raidWarnBox.tooltip = "Display a Raid Warning message when a queue reward is found"
 
 local soundWarnBox = createToggleBox(SellSwordOptions, "sso_soundWarn", "Play Sound Warnings")
 soundWarnBox:SetPoint("LEFT", raidWarnBox, "RIGHT", 180, 0)
+soundWarnBox.tooltip = "Play a Raid Warning sound when a queue reward is found"
 
 local queueTypes = addSubCategory(SellSwordOptions, "Queue Types")
 queueTypes:SetPoint("TOPLEFT", raidWarnBox, "BOTTOMLEFT", 0, -15)

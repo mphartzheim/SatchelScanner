@@ -26,4 +26,3 @@
 # Core files
 SellSword.lua
 SellSword_Options.lua
-SellSword.xml
