@@ -104,8 +104,6 @@ ssf:SetScript("OnDragStart", ssf.StartMoving)
 ssf:SetScript("OnDragStop", ssf.StopMovingOrSizing)
 ssf:SetScript("OnHide", ssf.StopMovingOrSizing)
 
-tinsert(UISpecialFrames, "SellSwordFrame")
-
 -- -- Close button
 -- local closeButton = CreateFrame("Button", nil, ssf, "UIPanelButtonTemplate")
 -- closeButton:SetPoint("BOTTOM", 0, 10)
@@ -117,51 +115,135 @@ tinsert(UISpecialFrames, "SellSwordFrame")
 -- end)
 -- ssf.closeButton = closeButton
 
-local messageFrame = CreateFrame("ScrollingMessageFrame", nil, ssf)
-messageFrame:SetPoint("TOPLEFT", ssf, "TOPLEFT", 20, 10) -- Annoying arbitrary numbers!
-messageFrame:SetSize(ssf.width, ssf.height - 20) -- Annoying arbitrary numbers!
-messageFrame:SetFontObject(GameFontNormal)
-messageFrame:SetTextColor(1, 1, 1, 1) -- default color
-messageFrame:SetJustifyH("LEFT")
-messageFrame:SetHyperlinksEnabled(true)
-messageFrame:SetFading(false)
-messageFrame:SetMaxLines(300)
-ssf.messageFrame = messageFrame
+local tankMessageFrame = CreateFrame("ScrollingMessageFrame", nil, ssf)
+local tmf = tankMessageFrame
+tmf:SetPoint("TOPLEFT", ssf, "TOPLEFT", 0, 0) -- Annoying arbitrary numbers!
+tmf:SetSize(80, ssf.height - 20) -- Annoying arbitrary numbers!
+tmf:SetFontObject(GameFontNormal)
+tmf:SetTextColor(1, 1, 1, 1) -- default color
+tmf:SetJustifyH("LEFT")
+tmf:SetHyperlinksEnabled(true)
+tmf:SetFading(false)
+tmf:SetMaxLines(300)
+ssf.tankMessageFrame = tankMessageFrame
 
 for i = 1, 25 do
-	messageFrame:AddMessage(i .. ". Here is a message!")
+	tmf:AddMessage(i .. "Scanning...")
+end
+
+local healMessageFrame = CreateFrame("ScrollingMessageFrame", nil, ssf)
+local hmf = healMessageFrame
+hmf:SetPoint("TOPLEFT", tmf, "TOPRIGHT", 5, 0) -- Annoying arbitrary numbers!
+hmf:SetSize(80, ssf.height - 20) -- Annoying arbitrary numbers!
+hmf:SetFontObject(GameFontNormal)
+hmf:SetTextColor(1, 1, 1, 1) -- default color
+hmf:SetJustifyH("LEFT")
+hmf:SetHyperlinksEnabled(true)
+hmf:SetFading(false)
+hmf:SetMaxLines(300)
+ssf.healMessageFrame = healMessageFrame
+
+for i = 1, 25 do
+	hmf:AddMessage(i .. "Scanning...")
+end
+
+local dpsMessageFrame = CreateFrame("ScrollingMessageFrame", nil, ssf)
+local dmf = dpsMessageFrame
+dmf:SetPoint("TOPLEFT", hmf, "TOPRIGHT", 5, 0) -- Annoying arbitrary numbers!
+dmf:SetSize(80, ssf.height - 20) -- Annoying arbitrary numbers!
+dmf:SetFontObject(GameFontNormal)
+dmf:SetTextColor(1, 1, 1, 1) -- default color
+dmf:SetJustifyH("LEFT")
+dmf:SetHyperlinksEnabled(true)
+dmf:SetFading(false)
+dmf:SetMaxLines(300)
+ssf.dpsMessageFrame = dpsMessageFrame
+
+for i = 1, 25 do
+	dmf:AddMessage(i .. "Scanning...")
 end
 
 -------------------------------------------------------------------------------
 -- Scroll bar
 -------------------------------------------------------------------------------
-local scrollBar = CreateFrame("Slider", nil, ssf, "UIPanelScrollBarTemplate")
-scrollBar:SetPoint("TOPLEFT", ssf, "TOPLEFT", -5, -17.5) -- Annoying arbitrary numbers!
-scrollBar:SetSize(30, ssf.height - 63) -- Annoying arbitrary numbers!
-scrollBar:SetMinMaxValues(0, ssf.height / 10) -- Max Value needs to adjust based on frame height and # of lines to show
-scrollBar:SetValueStep(1)
-scrollBar.scrollStep = 1
-ssf.scrollBar = scrollBar
+local tankScrollBar = CreateFrame("Slider", nil, ssf, "UIPanelScrollBarTemplate")
+local tsb = tankScrollBar
+tsb:SetMinMaxValues(0, ssf.height / 10) -- Max Value needs to adjust based on frame height and # of lines to show
+tsb:SetValueStep(1)
+tsb.scrollStep = 1
+ssf.tankScrollBar = tankScrollBar
 
-scrollBar:SetScript("OnValueChanged", function(self, value)
-	messageFrame:SetScrollOffset(select(2, scrollBar:GetMinMaxValues()) - value)
+tsb:SetScript("OnValueChanged", function(self, value)
+	tmf:SetScrollOffset(select(2, tsb:GetMinMaxValues()) - value)
 end)
 
-scrollBar:SetValue(select(2, scrollBar:GetMinMaxValues()))
+tsb:SetValue(select(2, tsb:GetMinMaxValues()))
 
-ssf:SetScript("OnMouseWheel", function(self, delta)
-	local cur_val = scrollBar:GetValue()
-	local min_val, max_val = scrollBar:GetMinMaxValues()
+local healScrollBar = CreateFrame("Slider", nil, ssf, "UIPanelScrollBarTemplate")
+local hsb = healScrollBar
+hsb:SetMinMaxValues(0, ssf.height / 10) -- Max Value needs to adjust based on frame height and # of lines to show
+hsb:SetValueStep(1)
+hsb.scrollStep = 1
+ssf.healScrollBar = healScrollBar
+
+hsb:SetScript("OnValueChanged", function(self, value)
+	hmf:SetScrollOffset(select(2, hsb:GetMinMaxValues()) - value)
+end)
+
+hsb:SetValue(select(2, hsb:GetMinMaxValues()))
+
+local dpsScrollBar = CreateFrame("Slider", nil, ssf, "UIPanelScrollBarTemplate")
+local dsb = dpsScrollBar
+dsb:SetMinMaxValues(0, ssf.height / 10) -- Max Value needs to adjust based on frame height and # of lines to show
+dsb:SetValueStep(1)
+dsb.scrollStep = 1
+ssf.dpsScrollBar = dpsScrollBar
+
+dsb:SetScript("OnValueChanged", function(self, value)
+	dmf:SetScrollOffset(select(2, dsb:GetMinMaxValues()) - value)
+end)
+
+dsb:SetValue(select(2, dsb:GetMinMaxValues()))
+
+--ssf:SetScript("OnMouseWheel", function(self, delta)
+tmf:SetScript("OnMouseWheel", function(self, delta)
+	local cur_val = tsb:GetValue()
+	local min_val, max_val = tsb:GetMinMaxValues()
 
 	if delta < 0 and cur_val < max_val then
 		cur_val = math.min(max_val, cur_val + 1)
-		scrollBar:SetValue(cur_val)
+		tsb:SetValue(cur_val)
 	elseif delta > 0 and cur_val > min_val then
 		cur_val = math.max(min_val, cur_val - 1)
-		scrollBar:SetValue(cur_val)
+		tsb:SetValue(cur_val)
 	end
 end)
 
+hmf:SetScript("OnMouseWheel", function(self, delta)
+	local cur_val = hsb:GetValue()
+	local min_val, max_val = hsb:GetMinMaxValues()
+
+	if delta < 0 and cur_val < max_val then
+		cur_val = math.min(max_val, cur_val + 1)
+		hsb:SetValue(cur_val)
+	elseif delta > 0 and cur_val > min_val then
+		cur_val = math.max(min_val, cur_val - 1)
+		hsb:SetValue(cur_val)
+	end
+end)
+
+dmf:SetScript("OnMouseWheel", function(self, delta)
+	local cur_val = dsb:GetValue()
+	local min_val, max_val = dsb:GetMinMaxValues()
+
+	if delta < 0 and cur_val < max_val then
+		cur_val = math.min(max_val, cur_val + 1)
+		dsb:SetValue(cur_val)
+	elseif delta > 0 and cur_val > min_val then
+		cur_val = math.max(min_val, cur_val - 1)
+		dsb:SetValue(cur_val)
+	end
+end)
 
 -- Scanner
 -- function satchelFinder(id)
