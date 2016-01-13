@@ -53,22 +53,22 @@ C.charDefaults = {
 }
 
 C.dungeonVar = {
-  [789]  = {sVarKey = "sso_ScanForWoD",         enabled = true, type = "WoD", dungeon = " Heroic ", } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [744]  = {sVarKey = "sso_ScanForTW_BC",       enabled = true, type = "TW",  dungeon = " BC ",     } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [995]  = {sVarKey = "sso_ScanForTW_LK",       enabled = true, type = "TW",  dungeon = " LK ",     } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [1146] = {sVarKey = "sso_ScanForTW_CT",       enabled = true, type = "TW",  dungeon = " Cata ",   } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [849]  = {sVarKey = "sso_ScanForLFR_HM_WC",   enabled = true, type = "LFR", dungeon = " WC ",     } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [850]  = {sVarKey = "sso_ScanForLFR_HM_AS",   enabled = true, type = "LFR", dungeon = " AS ",     } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [851]  = {sVarKey = "sso_ScanForLFR_HM_IR",   enabled = true, type = "LFR", dungeon = " IR ",     } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [847]  = {sVarKey = "sso_ScanForLFR_BRF_SW",  enabled = true, type = "LFR", dungeon = " SW ",     } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [846]  = {sVarKey = "sso_ScanForLFR_BRF_BF",  enabled = true, type = "LFR", dungeon = " BF ",     } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [848]  = {sVarKey = "sso_ScanForLFR_BRF_IA",  enabled = true, type = "LFR", dungeon = " IA ",     } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [823]  = {sVarKey = "sso_ScanForLFR_BRF_BC",  enabled = true, type = "LFR", dungeon = " BC ",     } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [982]  = {sVarKey = "sso_ScanForLFR_HFC_HB",  enabled = true, type = "LFR", dungeon = " HB ",     } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [983]  = {sVarKey = "sso_ScanForLFR_HFC_HoB", enabled = true, type = "LFR", dungeon = " HoB ",    } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [984]  = {sVarKey = "sso_ScanForLFR_HFC_BoS", enabled = true, type = "LFR", dungeon = " BoS ",    } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [985]  = {sVarKey = "sso_ScanForLFR_HFC_DR",  enabled = true, type = "LFR", dungeon = " DR ",     } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
-  [986]  = {sVarKey = "sso_ScanForLFR_HFC_BG",  enabled = true, type = "LFR", dungeon = " BG ",     } -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [789]  = {sVarKey = "sso_ScanForWoD",         enabled = true, type = "WoD", dungeon = " Heroic ", }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [744]  = {sVarKey = "sso_ScanForTW_BC",       enabled = true, type = "TW",  dungeon = " BC ",     }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [995]  = {sVarKey = "sso_ScanForTW_LK",       enabled = true, type = "TW",  dungeon = " LK ",     }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [1146] = {sVarKey = "sso_ScanForTW_CT",       enabled = true, type = "TW",  dungeon = " Cata ",   }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [849]  = {sVarKey = "sso_ScanForLFR_HM_WC",   enabled = true, type = "LFR", dungeon = " WC ",     }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [850]  = {sVarKey = "sso_ScanForLFR_HM_AS",   enabled = true, type = "LFR", dungeon = " AS ",     }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [851]  = {sVarKey = "sso_ScanForLFR_HM_IR",   enabled = true, type = "LFR", dungeon = " IR ",     }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [847]  = {sVarKey = "sso_ScanForLFR_BRF_SW",  enabled = true, type = "LFR", dungeon = " SW ",     }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [846]  = {sVarKey = "sso_ScanForLFR_BRF_BF",  enabled = true, type = "LFR", dungeon = " BF ",     }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [848]  = {sVarKey = "sso_ScanForLFR_BRF_IA",  enabled = true, type = "LFR", dungeon = " IA ",     }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [823]  = {sVarKey = "sso_ScanForLFR_BRF_BC",  enabled = true, type = "LFR", dungeon = " BC ",     }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [982]  = {sVarKey = "sso_ScanForLFR_HFC_HB",  enabled = true, type = "LFR", dungeon = " HB ",     }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [983]  = {sVarKey = "sso_ScanForLFR_HFC_HoB", enabled = true, type = "LFR", dungeon = " HoB ",    }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [984]  = {sVarKey = "sso_ScanForLFR_HFC_BoS", enabled = true, type = "LFR", dungeon = " BoS ",    }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [985]  = {sVarKey = "sso_ScanForLFR_HFC_DR",  enabled = true, type = "LFR", dungeon = " DR ",     }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
+  [986]  = {sVarKey = "sso_ScanForLFR_HFC_BG",  enabled = true, type = "LFR", dungeon = " BG ",     }, -- Future use: tank = true, heal = true, dps = true, raidWarn = false, soundWarn = false},
 }
 
 local sellSword = CreateFrame("Frame", "sellSwordFrame", UIParent)
@@ -102,7 +102,14 @@ ssf.height = 150
 ssf:SetFrameStrata("BACKGROUND")
 ssf:SetSize(ssf.width, ssf.height)
 ssf:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-ssf:SetBackdrop(bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background")
+ssf:SetBackdrop({
+	bgFile   = "Interface\\DialogFrame\\UI-DialogBox-Background",
+	-- edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+	-- tile     = true,
+	-- tileSize = 32,
+	-- edgeSize = 32,
+	-- insets   = { left = 8, right = 8, top = 8, bottom = 8 }
+})
 ssf:SetBackdropColor(1, 0, 1, 0.75)
 ssf:EnableMouse(true)
 ssf:EnableMouseWheel(true)
